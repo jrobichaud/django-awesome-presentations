@@ -40,6 +40,13 @@ class TestUserFactory(TestCase):
         self.assertNotEqual(user1.username, user2.username)
 
 
+class TestUserFixtureFactory(TestCase):
+    fixtures = ['test-user']
+
+    def test_user_exists(self):
+        self.assertTrue(User.objects.filter(pk=1).exists())
+
+
 class TestEntryModel(TestCase):
 
     def test_create_instance(self):
