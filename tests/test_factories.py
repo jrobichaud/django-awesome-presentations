@@ -11,6 +11,10 @@ class TestUserFactory(TestCase):
         user = factories.UserFactory()
         self.assertTrue(User.objects.filter(pk=user.pk).exists())
 
+    def test_can_still_override_fields(self):
+        user = factories.UserFactory(username='foo')
+        self.assertEqual('foo', user.username)
+
     def test_username_is_unique(self):
         user1 = factories.UserFactory()
         user2 = factories.UserFactory()
@@ -27,6 +31,10 @@ class TestEntryFactory(TestCase):
 
         with self.subTest('Entry generated is already full_clean'):
             entry.full_clean()
+
+    def test_can_override_values_of_foreign_keys(self):
+        entry = factories.EntryFactory(blog__name='Awesome blog')
+        self.assertEqual('Awesome blog', entry.blog.name)
 
     def test_factory_can_create_many_to_many(self):
         with self.subTest('Can add authors to the factory'):
