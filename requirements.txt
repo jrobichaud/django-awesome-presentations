@@ -1,3 +1,3 @@
 Django==2.0.1
 factory-boy==2.8.1
-Faker==0.7.16
+Faker==0.8.8
