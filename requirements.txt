@@ -1,3 +1,5 @@
 Django==2.0.1
 factory-boy==2.8.1
 Faker==0.8.8
+
+-r testing_migrations/requirements.txt

@@ -1,0 +1,1 @@
+django-migration-testcase==0.0.13
