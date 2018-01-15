@@ -10,8 +10,14 @@ class AwesomeModelFactory(factory.DjangoModelFactory):
 
 
 class KittenFactory(factory.DjangoModelFactory):
-    name = factory.Faker('pystr')
 
     class Meta:
         model = models.Kitten
 
+
+class KittenName(factory.DjangoModelFactory):
+    name = factory.Faker('pystr')
+    kitten = factory.SubFactory(KittenFactory)
+
+    class Meta:
+        model = models.KittenName

@@ -6,5 +6,12 @@ class AwesomeModel(models.Model):
 
 
 class Kitten(models.Model):
-    name = models.CharField(max_length=100)
+    """
+    Kitten used to have a `name = models.CharField(max_length=100)` and was replaced by a KittenName model in order
+    support multiple names
+    """
 
+
+class KittenName(models.Model):
+    kitten = models.ForeignKey(Kitten, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
