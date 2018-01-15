@@ -15,7 +15,7 @@ class KittenFactory(factory.DjangoModelFactory):
         model = models.Kitten
 
 
-class KittenName(factory.DjangoModelFactory):
+class KittenNameFactory(factory.DjangoModelFactory):
     name = factory.Faker('pystr')
     kitten = factory.SubFactory(KittenFactory)
 

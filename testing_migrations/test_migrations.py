@@ -12,6 +12,8 @@ class Test0002AwesomeModelUniqueName(MigrationTest):
     def setUp(self):
         super().setUp()
 
+        # It is fine to shamelessly copy and paste factories in order to simplify testing
+        # You have to copy and paste to avoid potential space-time paradoxes
         class AwesomeModelFactory(factory.DjangoModelFactory):
             name = factory.Faker('pystr')
 
@@ -36,8 +38,6 @@ class Test0005MigrateToKittenName(MigrationTest):
     def setUp(self):
         super().setUp()
 
-        # It is fine to shamelessly copy and paste factories in order to simplify testing
-        # You have to copy and paste to avoid potential code paradoxes
         class KittenFactory(factory.DjangoModelFactory):
             name = factory.Faker('pystr')
 
