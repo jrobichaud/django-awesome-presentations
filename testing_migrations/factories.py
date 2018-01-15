@@ -7,3 +7,11 @@ class AwesomeModelFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = models.AwesomeModel
+
+
+class KittenFactory(factory.DjangoModelFactory):
+    name = factory.Faker('pystr')
+
+    class Meta:
+        model = models.Kitten
+
