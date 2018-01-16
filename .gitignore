@@ -1,6 +1,8 @@
 *.sqlite3
 __pycache__/
 
+.python-version
+
 # idea IDE
 .idea/*
 !.idea/codeStyles/
