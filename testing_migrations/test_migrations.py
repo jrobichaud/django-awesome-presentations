@@ -84,3 +84,29 @@ class Test0005MigrateToKittenName(MigrationTest):
             reverted_kitten = kitten_model.objects.get(pk=kitten.pk)
 
             self.assertEqual(reverted_kitten.name, expected_kitten_name, "Expects to have the first name given.")
+
+
+class Test0005MigrateToKittenNameReverse(MigrationTest):
+    app_name = 'testing_migrations'
+    before = '0007_remove_kitten_name'
+    after = '0004_kittenname'
+
+    def setUp(self):
+        super().setUp()
+
+        class KittenFactory(factory.DjangoModelFactory):
+
+            class Meta:
+                model = self.get_model_before('testing_migrations.Kitten')
+
+        self.kitten_factory = KittenFactory
+
+    def test_anonymous_kitten(self):
+        kitten = self.kitten_factory()
+        self.run_migration()
+
+        kitten_model = self.get_model_after('testing_migrations.Kitten')
+
+        updated_kitten = kitten_model.objects.get(pk=kitten.pk)
+
+        self.assertEqual(updated_kitten.name, "anonymous")
