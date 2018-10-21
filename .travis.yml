@@ -2,6 +2,8 @@ language: python
 python:
     - "3.6"
     - "3.7"
+env:
+    - DJANGO_SETTINGS_MODULE=django_awesome_presentations.settings
 install:
     - pip install -r requirements.txt
 script:
