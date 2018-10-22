@@ -1,9 +1,13 @@
 language: python
 python:
     - "3.6"
+services:
+    - mysql
 env:
-    - DJANGO_SETTINGS_MODULE=django_awesome_presentations.settings
+    - DJANGO_SETTINGS_MODULE=django_awesome_presentations.settings DB=mysql
 install:
     - pip install -r requirements.txt
+before_script:
+    - mysql -e 'create database test;' -u root
 script:
     - python manage.py test
