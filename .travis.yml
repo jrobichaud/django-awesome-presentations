@@ -5,5 +5,8 @@ env:
     - DJANGO_SETTINGS_MODULE=django_awesome_presentations.settings
 install:
     - pip install -r requirements.txt
+    - pip install coverage codecov
 script:
-    - python manage.py test
+    - coverage run --source='.' manage.py test
+after_success:
+    - codecov
