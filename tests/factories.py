@@ -42,15 +42,6 @@ class EntryFactory(factory.DjangoModelFactory):
     class Meta:
         model = models.Entry
 
-    class Params:
-        with_authors = factory.Trait(
-            authors=factory.LazyFunction(
-                lambda: tuple(
-                    AuthorFactory.create_batch(random.randint(1, 10))
-                )
-            )
-        )
-
     blog = factory.SubFactory(BlogFactory)
     headline = factory.Faker('sentence', nb_words=4)
     body_text = factory.Faker('paragraphs', nb=4)
@@ -63,15 +54,24 @@ class EntryFactory(factory.DjangoModelFactory):
     )
 
     @factory.post_generation
-    def authors(self, create, extracted, **kwargs):
-        if not create:
-            # Simple build, do nothing.
-            return
+    def with_authors(self, create, extracted, **kwargs):
+        if extracted and create:
+            EntryFactory.create_authors(
+                self,
+                create,
+                AuthorFactory.create_batch(random.randint(1, 10))
+            )
 
-        if extracted:
+    @factory.post_generation
+    def authors(self, create, extracted, **kwargs):
+        EntryFactory.create_authors(self, create, extracted)
+
+    @staticmethod
+    def create_authors(obj, create, extracted):
+        if extracted and create:
             # A list of authors were passed in, use them
             for author in extracted:
-                self.authors.add(author)
+                obj.authors.add(author)
 
     n_comments = factory.Faker('pyint')
     n_pingbacks = factory.Faker('pyint')
