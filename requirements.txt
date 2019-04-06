@@ -1,6 +1,6 @@
 # Django==2.0.1
 Django>=1.11,<2
-factory-boy==2.8.1
-Faker==0.9.1
+factory-boy==2.11.1
+Faker==1.0.2
 
 -r testing_migrations/requirements.txt
